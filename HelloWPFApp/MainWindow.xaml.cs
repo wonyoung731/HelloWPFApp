@@ -21,13 +21,20 @@ namespace HelloWPFApp
         public MainWindow()
         {
             InitializeComponent();
+
+            this.button.Click += button_Click;
         }
         
-        private void btnPath_Click(object sender, EventArgs e)
+        private void button_Click(object sender, RoutedEventArgs e)
         {
-            if (this.ofdFile.ShowDialog() == DialogResult.OK)
+            CommonOpenFileDialog folderDialog = new CommonOpenFileDialog()
             {
-                this.textPath.Text = this.ofdFile.FileName;
+                InitialDirectory = "",
+                IsFolderPicker = true
+            };
+            if(folderDialog.ShowDialog() == CommonFileDialogResult.Ok)
+            {
+                this.textBox.Text = folderDialog.FileName;
             }
         }
         
